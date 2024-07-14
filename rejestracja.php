@@ -89,6 +89,10 @@
 				{
 					$wszystko_OK = false;
 					$_SESSION['e_email'] = "Istnieje już konto przypisane do tego adresu e-mail!";
+					$response = array(
+						'status' => 'error',
+						'message' => 'Istnieje już konto przypisane do tego adresu e-mail'
+					);
 				}	
 				//Czy nick jest juz zarezerwowany?
 				$rezultat = $polaczenie->query("SELECT id FROM users WHERE login ='$nick'");
@@ -98,7 +102,11 @@
 				if($ile_takich_nickow>0)
 				{
 					$wszystko_OK = false;
-					$_SESSION['e_nick'] = "Istnieje już gracz o takim nicku! Wybierz inny.";
+					$_SESSION['e_nick'] = "Istnieje już gracz o takim nicku! Wybierz inny";
+					$response = array(
+						'status' => 'error',
+						'message' => 'Istnieje już gracz o takim nicku! Wybierz inny'
+					);
 				}	
 				
 				if($wszystko_OK==true)

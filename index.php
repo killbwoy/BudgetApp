@@ -31,8 +31,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 
     <!-- Custom sheet -->
-    <link rel="stylesheet" href="./css/styleIndex.css" />
-    <link rel="stylesheet" href="./css/fontello.css" />
+    <link rel="stylesheet" href="./css/styleIndex.css">
+    <link rel="stylesheet" href="./css/fontello.css">
 
     <!-- Custom js -->
     <!--<script src = "LoginSignUp.js"></script>-->
@@ -137,7 +137,7 @@
                         <h3>Kontakt z autorem</h3>
                         <p>Jeśli masz jakieś pytanie chętnie na nie odpowiem . Wybierz sposób w jaki chcesz sie
                             ze mną skomunikować.</p>
-                        <button type="button" class="" data-bs-toggle="modal" data-bs-target="">
+                        <button type="button" class="buttonWrite" data-bs-toggle="modal" data-bs-target="">
                             Napisz do mnie
                         </button>
                     </div>
@@ -345,7 +345,6 @@
             $('.modal-dialog').css('opacity', '.5');
         },
         dataType: 'json',
-        //success:function(msg)
         success:function(response){
             console.log("Odpowiedź z serwera: ", response);
             if(response.status === 'success'){
@@ -354,7 +353,6 @@
                 $('#pass1').val('');
                 $('#pass2').val('');
                 alert(response.message);
-                alert('Rejestracja przebiegła pomyślnie');
 
                // Przekieruj użytkownika do uzytkownik.php po 2 sekundach. 
                 setTimeout(function() {
@@ -362,8 +360,7 @@
                 }, 2000);
             }else{
                 alert('Pojawiły sie problemy, spróbuj ponownie');
-                console.log(response.errors);
-                console.log(response.message);
+                alert(response.message);
             }
             $('.btn-primary').removeAttr("disabled");
             $('.modal-dialog').css('opacity', '');

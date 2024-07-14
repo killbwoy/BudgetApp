@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 
     <!-- Custom sheet -->
-    <link rel="stylesheet" href="./css/styleUser.css" />
-    <link rel="stylesheet" href="./css/fontello.css" />
+    <link rel="stylesheet" href="./css/styleUser.css">
+    <link rel="stylesheet" href="./css/fontello.css">
 
     <!-- Custom js -->
 
@@ -47,9 +47,9 @@
             <nav>
                 <ul class="menu">
                     <li><img class="logoSVG" src="./svg/save-money.png" alt="Logo" /></li>
-                    <li><a href="#">Strona główna</a></li>
-                    <li><a href="#">Dodaj przychód</a></li>
-                    <li><a href="#">Dodaj wydatek</a></li>
+                    <li><a href="uzytkownik.php">Strona główna</a></li>
+                    <li><a href="dodajPrzychod.html">Dodaj przychód</a></li>
+                    <li><a href="dodajWydatek.html">Dodaj wydatek</a></li>
                     <li><a href="#">Przeglądaj bilans</a></li>
                     <li><a href="#">Ustawienia</a></li>
                     <li>
@@ -79,6 +79,11 @@
          {
          echo '<h4 class="alert alert-warning">'.$_SESSION['message'].'</h4>';
          unset($_SESSION['message']);
+        }
+        if(isset($_SESSION['messageAdd']))
+        {
+        echo '<h4 class="alert alert-warning">'.$_SESSION['messageAdd'].'</h4>';
+        unset($_SESSION['messageAdd']);
         }
         ?>
       </div>
