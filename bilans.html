@@ -75,48 +75,47 @@
       <article>
         <div id="content">
           <div id="balance-section">
-            <div id="header">
-              <h1>Przeglądaj bilans</h1>
-            </div>
-            <div id="inside">
-              <p>
-                Okres czasu:
-                <select name="period">
-                  <option value="current_month">Bieżący miesiąc</option>
-                  <option value="previous_month">Poprzedni miesiąc</option>
-                  <option value="current_year">Bieżący rok</option>
-                  <option value="custom">Niestandardowy</option>
-                </select>
-              </p>
-              <div id="custom_dates" style="display: none">
-                <p>Początek: <input type="date" name="start_date" /></p>
-                <p>Koniec: <input type="date" name="end_date" /></p>
+            <form action="bilans.php" method="POST">
+              <div id="header">
+                <h1>Przeglądaj bilans</h1>
               </div>
-              <p>
-              <form action="bilansWynik.html">
-                <input type="submit" class="button_active" value="Wyświetl" />
-                <input type="reset" value="Anuluj" />
-              </form>
-              </p>
-            </div>
+              <div id="inside">
+                <p> Okres czasu:
+                  <select name="period">
+                    <option value="current_month">Bieżący miesiąc</option>
+                    <option value="previous_month">Poprzedni miesiąc</option>
+                    <option value="current_year">Bieżący rok</option>
+                    <option value="custom">Niestandardowy</option>
+                  </select>
+                </p>
+                <div id="custom_dates" style="display: none">
+                  <p>Początek: <input type="date" name="start_date" /></p>
+                  <p>Koniec: <input type="date" name="end_date" /></p>
+                </div>
+                <p>
+                  <input type="submit" class="button_active" value="Wyświetl" />
+                  <input type="reset" value="Anuluj" />
+                </p>
+            </form>
           </div>
         </div>
+  </div>
 
-        <section class="s3">
-          <div class="central">
-          </div>
-        </section>
-      </article>
-    </main>
+  <section class="s3">
+    <div class="central">
+    </div>
+  </section>
+  </article>
+  </main>
 
-    <!-- Featured Section -->
+  <!-- Featured Section -->
 
-    <!--Footer-->
-    <footer>
-      <div class="info">
-        Wszelkie prawa zastrzeżone &copy 2024 .MK.
-      </div>
-    </footer>
+  <!--Footer-->
+  <footer>
+    <div class="info">
+      Wszelkie prawa zastrzeżone &copy 2024 .MK.
+    </div>
+  </footer>
 
   </div>
 

@@ -50,7 +50,7 @@
                     <li><a href="uzytkownik.php">Strona główna</a></li>
                     <li><a href="dodajPrzychod.html">Dodaj przychód</a></li>
                     <li><a href="dodajWydatek.html">Dodaj wydatek</a></li>
-                    <li><a href="#">Przeglądaj bilans</a></li>
+                    <li><a href="bilans.html">Przeglądaj bilans</a></li>
                     <li><a href="#">Ustawienia</a></li>
                     <li>
                         <a href = "wyloguj.php"><button type="button" class="buttonSignup" data-bs-toggle="modal" data-bs-target="">Wyloguj</button></a>

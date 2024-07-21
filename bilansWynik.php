@@ -5,6 +5,67 @@
 		header('Location: index.php');
 		exit();
 	}
+
+  $expenses = isset($_SESSION['expenses']) ? $_SESSION['expenses'] : [];
+  $incomes = isset($_SESSION['incomes']) ? $_SESSION['incomes'] : [];
+  $selected_period = isset($_SESSION['selected_period']) ? $_SESSION['selected_period'] : 'Nie Wybrano okresu';
+
+  // Funkcja do obliczania bilansu
+function calculate_balance($incomes, $expenses) {
+  $total_income = 0;
+  $total_expense = 0;
+
+  // Sumowanie przychodów
+  foreach ($incomes as $income) {
+      if (isset($income['amount'])) {
+          $total_income += $income['amount'];
+      }
+  }
+
+  // Sumowanie wydatków
+  foreach ($expenses as $expense) {
+      if (isset($expense['amount'])) {
+          $total_expense += $expense['amount'];
+      }
+  }
+
+  // Oblicz bilans
+  $balance = $total_income - $total_expense;
+  return $balance;
+}
+
+$balance = calculate_balance($incomes, $expenses);
+
+  function getPeriodName($period) {
+    switch ($period) {
+        case 'current_month':
+            return 'Bieżący miesiąc';
+        case 'previous_month':
+            return 'Poprzedni miesiąc';
+        case 'current_year':
+            return 'Bieżący rok';
+        case 'custom':
+            return '';
+        default:
+            return 'Nie wybrano okresu';
+    }
+}
+
+// Funkcja do wyświetlania dat dla niestandardowego okresu
+function getCustomPeriod($start_date, $end_date) {
+  return "Od $start_date do $end_date";
+}
+
+$selected_period_name = getPeriodName($selected_period);
+
+// Jeżeli wybrano okres niestandardowy, uzyskaj daty z sesji, jeśli są dostępne
+$custom_period = '';
+if ($selected_period == 'custom') {
+    $start_date = isset($_SESSION['custom_start_date']) ? $_SESSION['custom_start_date'] : 'brak daty początkowej';
+    $end_date = isset($_SESSION['custom_end_date']) ? $_SESSION['custom_end_date'] : 'brak daty końcowej';
+    $custom_period = getCustomPeriod($start_date, $end_date);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -70,15 +131,18 @@
 
     </header>
 
-    <!-- Main -->
+    <!-- Main -->    
+    
     <div>
-      <h2 class="zestawienie">
-        Zestawienie (przykładowe) budżetu z wybranego okresu
-      </h2>
+      <h1 class="zestawienie">
+        Zestawienie budżetu z wybranego okresu: <?php echo htmlspecialchars($selected_period_name); ?>
+        <?php echo ($selected_period == 'custom') ? $custom_period : ''; ?>
+      </h1>
     </div>
 
     <div class="container">
       <section class="section1">
+      <?php if (!empty($incomes)): ?>
         <table class="content-table">
           <thead>
             <tr>
@@ -86,26 +150,32 @@
             </tr>
           </thead>
           <tbody>
+          <?php foreach ($incomes as $income): ?>
             <tr>
-              <td>Wynagrodzenie</td>
+              <td><?php echo htmlspecialchars($income['category']); ?></td>
             </tr>
             <tr class="active-row">
-              <td>5 000 PLN</td>
+              <td><?php echo htmlspecialchars($income['amount']) . ' PLN'; ?></td>
             </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+        <?php else: ?>
+          <table class="content-table">
+          <thead>
             <tr>
-              <td>Sprzedaż Allegro</td>
+              <th>Przychody</th>
             </tr>
-            <tr class="active-row">
-              <td>1 000 PLN</td>
-            </tr>
+          </thead>
+          <tbody>
             <tr>
-              <td>Odsetki z lokaty</td>
-            </tr>
-            <tr class="active-row">
-              <td>100 PLN</td>
+              <td>Brak danych do wyświetlenia</td>
             </tr>
           </tbody>
         </table>
+        <?php endif; ?>
+
+        <?php if (!empty($expenses)): ?>
         <table class="content-table">
           <thead>
             <tr>
@@ -113,26 +183,30 @@
             </tr>
           </thead>
           <tbody>
+          <?php foreach ($expenses as $expense): ?>
             <tr>
-              <td>Wynajem mieszkania</td>
+              <td><?php echo htmlspecialchars($expense['category']); ?></td>
             </tr>
             <tr class="active-row">
-              <td>2 000 PLN</td>
+              <td><?php echo htmlspecialchars($expense['amount']) . ' PLN'; ?></td>
             </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+        <?php else: ?>
+          <table class="content-table">
+          <thead>
             <tr>
-              <td>Jedzenie</td>
+              <th>Wydatki</th>
             </tr>
-            <tr class="active-row">
-              <td>1 000 PLN</td>
-            </tr>
+          </thead>
+          <tbody>
             <tr>
-              <td>Transport</td>
-            </tr>
-            <tr class="active-row">
-              <td>500 PLN</td>
+              <td>Brak danych do wyświetlenia</td>
             </tr>
           </tbody>
         </table>
+        <?php endif; ?>
       </section>
 
       <section class="section2">
@@ -143,12 +217,25 @@
             </tr>
           </thead>
           <tbody>
+            <?php if ($balance > 0): ?>
             <tr>
-              <td>Udało Ci się zaoszczędzić :</td>
+              <td>Udało Ci się zaoszczędzić:</td>
             </tr>
             <tr class="active-row">
-              <td>2 600 PLN</td>
+              <td><?php echo htmlspecialchars($balance) . ' PLN'; ?></td>
             </tr>
+            <?php elseif ($balance < 0): ?>
+            <tr>
+              <td>Masz deficyt:</td>
+            </tr>
+            <tr class="active-row">
+              <td><?php echo htmlspecialchars($balance) . ' PLN'; ?></td>
+            </tr>
+            <?php else: ?>
+            <tr>
+              <td>Bilans jest równy zero</td>
+            </tr>
+            <?php endif; ?>
           </tbody>
         </table>
       </section>

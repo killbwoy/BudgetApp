@@ -40,7 +40,7 @@
 	
 					unset($_SESSION['errorLogin']);
 					$result->free_result();
-					$_SESSION['message'] = "Zalogowano pomyślnie. Witaj". $_SESSION['login'];
+					$_SESSION['message'] = "Zalogowano pomyślnie. Witaj ". $_SESSION['login'];
 					header('Location: uzytkownik.php');
 
 				} else {
