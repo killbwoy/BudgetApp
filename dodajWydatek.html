@@ -80,41 +80,43 @@
             </div>
 
             <div id="inside" class="my-form">
-              <p> Kwota <input type="number" id="inputNumber"></p>
-              <p> Data <input type="date" id="inputDate"> </p>
-              <p> Rodzaj płatnosci
-                <select name="kategoria">
-                  <option value="wynagrodzenie">Gotówka</option>
-                  <option value="odsetki">Karta</option>
-                </select>
-              </p>
-              <p> Kategoria
-                <select name="category">
-                  <option value="food">Jedzenie</option>
-                  <option value="housing">Dom</option>
-                  <option value="transportation">Transport</option>
-                  <option value="telecommunications">Telekomunikacja</option>
-                  <option value="healthcare">Zdrowie</option>
-                  <option value="clothing">Ubrania</option>
-                  <option value="hygiene">Hyigiena</option>
-                  <option value="children">Dzieci</option>
-                  <option value="entertainment">Rozrywka</option>
-                  <option value="trip">Podróze</option>
-                  <option value="training">Trening</option>
-                  <option value="books">Książki</option>
-                  <option value="debt">Spłaty kredytu</option>
-                  <option value="donation">Dobroczynność</option>
-                  <option value="other">Poduszka finansowa</option>
-                  <option value="other">Inwestycje</option>
-                </select>
-              </p>
-              <p>
-                Uwagi <input type="text" id="inputText">
-              </p>
-              <p>
-                <input type="submit" value="Zapisz">
-                <input type="submit" value="Anuluj">
-              </p>
+              <form action="dodajWydatek.php" method="POST">
+                <p> Kwota <input type="number" name="number" id="inputNumber"></p>
+                <p> Data <input type="date" name="date" id="inputDate"> </p>
+                <p> Rodzaj płatnosci
+                  <select name="expenseKind">
+                    <option value="gotówka">Gotówka</option>
+                    <option value="karta">Karta</option>
+                  </select>
+                </p>
+                <p> Kategoria
+                  <select name="category">
+                    <option value="jedzenie">Jedzenie</option>
+                    <option value="dom">Dom</option>
+                    <option value="transport">Transport</option>
+                    <option value="telekomunikacja">Telekomunikacja</option>
+                    <option value="zdrowie">Zdrowie</option>
+                    <option value="ubrania">Ubrania</option>
+                    <option value="higiena">Hyigiena</option>
+                    <option value="dzieci">Dzieci</option>
+                    <option value="rozrywka">Rozrywka</option>
+                    <option value="podroze">Podróze</option>
+                    <option value="trening">Trening</option>
+                    <option value="ksiazki">Książki</option>
+                    <option value="kredyt">Spłaty kredytu</option>
+                    <option value="dobroczynnosc">Dobroczynność</option>
+                    <option value="poduszka finsasowa">Poduszka finansowa</option>
+                    <option value="inwestycje">Inwestycje</option>
+                  </select>
+                </p>
+                <p>
+                  Uwagi <input type="text" name="cautions" id="inputText">
+                </p>
+                <p>
+                  <input type="submit" value="Zapisz">
+                  <input type="submit" value="Anuluj">
+                </p>
+              </form>
             </div>
           </div>
         </div>
