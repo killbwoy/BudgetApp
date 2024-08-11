@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+if ($_SESSION["czas"] and $_SESSION["czas"]+60*10<time()) { // 10 minut
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+  }
+  $_SESSION["czas"] = time();
+
 // Sprawdzanie, czy użytkownik jest zalogowany
 if(!isset($_SESSION['logged'])){
     header('Location: index.php');
@@ -58,7 +65,6 @@ else if($period == "custom"){
     $_SESSION['custom_end_date'] = $end_date;
 }
 // Przygotowanie zapytania
-//$query = "SELECT amount, category, date FROM expenses WHERE date >= ? AND date <= ? AND userId = ?";
 $queryExpenses = "SELECT amount, category, date FROM expenses WHERE date >= ? AND date <= ? AND userId = ?";
 $queryIncomes = "SELECT amount, category, date FROM incomes WHERE date >= ? AND date <= ? AND userId = ?";
 

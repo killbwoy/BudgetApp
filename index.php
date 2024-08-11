@@ -29,7 +29,8 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
-
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/contacts/contact-1/assets/css/contact-1.css">
+    
     <!-- Custom sheet -->
     <link rel="stylesheet" href="./css/styleIndex.css">
     <link rel="stylesheet" href="./css/fontello.css">
@@ -137,7 +138,7 @@
                         <h3>Kontakt z autorem</h3>
                         <p>Jeśli masz jakieś pytanie chętnie na nie odpowiem . Wybierz sposób w jaki chcesz sie
                             ze mną skomunikować.</p>
-                        <button type="button" class="buttonWrite" data-bs-toggle="modal" data-bs-target="">
+                        <button type="button" class="btn btn-outline-dark btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Napisz do mnie
                         </button>
                     </div>
@@ -222,7 +223,66 @@
                 </div>
             </div>
         </div>
-        <!-- Contact -->
+
+        <!-- Contact Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Napisz do mnie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id = "contactForm" action = "sendEmail.php" method = "POST" onsubmit="return handleFormSubmit(event);">
+                <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
+                    <div class="col-12">
+                    <label for="fullname" class="form-label">Twoje imię <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="fullname" name="fullname" value="" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                        </svg>
+                        </span>
+                        <input type="email" class="form-control" id="email" name="email" value="" required>
+                    </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                    <label for="phone" class="form-label">Numer telefonu</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                        </svg>
+                        </span>
+                        <input type="tel" class="form-control" id="phone" name="phone" value="">
+                    </div>
+                    </div>
+                    <div class="col-12">
+                    <label for="message" class="form-label">Wiadomość <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+                    </div>
+                    <div class="col-12">
+                    <div class="d-grid">
+                        <button class="btn btn-primary btn-lg" type="submit">Wyślij</button>
+                    </div>
+                    </div>
+                </div>
+                <div id="alertSuccess" class="alert alert-success d-none" role="alert">
+                    Dziękujemy! Twoja wiadomość została wysłana.
+                </div>
+
+                <div id="alertError" class="alert alert-danger d-none" role="alert">
+                    Niestety, wystąpił błąd przy wysyłaniu wiadomości.
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
 
         <!--Footer-->
         <footer>
@@ -276,104 +336,146 @@
 		    });
 	});
 
-	function submitForm()
-	{
-        console.log("submitForm function called");
-		let reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-		let name = $('#name').val().trim();
-		let email = $('#email').val().trim();
-		let pass1 = $('#pass1').val().trim();
-		let pass2 = $('#pass2').val().trim();
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Zatrzymaj domyślną akcję formularza
 
-        // Debugging
-        console.log("Name: ", name);
-        console.log("Email: ", email);
-        console.log("Pass1: ", pass1);
-        console.log("Pass2: ", pass2);
+        if (validateForm()) {
+            var recaptchaResponse = grecaptcha.getResponse();
+            if (recaptchaResponse.length === 0) {
+                alert('Proszę zakończyć reCAPTCHA!');
+                return;
+            }
 
-		if(name == '')
-		{
-			alert('Prosze uzupełnić swoje imie');
-			$('#name').focus();
-			return false;
-		} else if(name.length < 3 || name.length > 20){
-            alert('Nick musi  zawierać się od 3 do 20 znaków!');
-			$('#name').focus();
-			return false;
-        }  else if(email == ''){
-			alert('Prosze uzupełnić swój adres email');
-			$('#email').focus();
-			return false;
-		} else if(!reg.test(email)){
-			alert('Prosze wpisac poprawny email.');
-			$('#email').focus();
-			return false;
-		} else if(pass1 === '' || pass2 === ''){
-			alert('Prosze uzupełnić haslo');
-			$('#pass1').focus();
-			return false;
-		} else if(pass1.length < 8 || pass1.length > 20){
-            alert('Hasło musi  zawierać się od 8 do 20 znaków!');
-			$('#name').focus();
-			return false;
-        }else if(pass1 !== pass2){
-			alert('Podane hasła nie są identyczne');
-			$('#pass2').focus();
-			return false;
-		} else if (!document.getElementById('regulamin').checked) {
-            // Sprawdzenie czy checkbox został zaznaczony
-            console.log("Regulamin niezaznaczony");
-            alert('Akceptuj regulamin.');
-            return false;
-        } 
+            document.getElementById('g-recaptcha-response').value = recaptchaResponse;
 
-        console.log("Wszystko w porządku, wykonuję żądanie AJAX");
+            submitForm();
+        }
+    });
+});
 
-   
+function validateForm() {
+    console.log("validateForm function called");
+
+    let reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+    let name = $('#name').val().trim();
+    let email = $('#email').val().trim();
+    let pass1 = $('#pass1').val().trim();
+    let pass2 = $('#pass2').val().trim();
+
+    if (name === '') {
+        alert('Proszę uzupełnić swoje imię');
+        $('#name').focus();
+        return false;
+    } else if (name.length < 3 || name.length > 20) {
+        alert('Nick musi zawierać się od 3 do 20 znaków!');
+        $('#name').focus();
+        return false;
+    } else if (email === '') {
+        alert('Proszę uzupełnić swój adres email');
+        $('#email').focus();
+        return false;
+    } else if (!reg.test(email)) {
+        alert('Proszę wpisać poprawny email.');
+        $('#email').focus();
+        return false;
+    } else if (pass1 === '' || pass2 === '') {
+        alert('Proszę uzupełnić hasło');
+        $('#pass1').focus();
+        return false;
+    } else if (pass1.length < 8 || pass1.length > 20) {
+        alert('Hasło musi zawierać się od 8 do 20 znaków!');
+        $('#pass1').focus();
+        return false;
+    } else if (pass1 !== pass2) {
+        alert('Podane hasła nie są identyczne');
+        $('#pass2').focus();
+        return false;
+    } else if (!document.getElementById('regulamin').checked) {
+        alert('Akceptuj regulamin.');
+        return false;
+    }
+
+    return true;
+}
+
+function submitForm() {
+    console.log("submitForm function called");
+
     $.ajax({
-        type:'POST',
-        url:'rejestracja.php',
-        data:{
+        type: 'POST',
+        url: 'rejestracja.php',
+        data: {
             contactFrmSubmit: 1,
-            name: name,
-            email: email,
-            pass1: pass1,
-            pass2: pass2
+            name: $('#name').val().trim(),
+            email: $('#email').val().trim(),
+            pass1: $('#pass1').val().trim(),
+            pass2: $('#pass2').val().trim(),
+            'g-recaptcha-response': document.getElementById('g-recaptcha-response').value
         },
-        beforeSend: function () {
-            $('.btn-primary').attr("disabled","disabled");
+        beforeSend: function() {
+            $('.btn-primary').attr("disabled", "disabled");
             $('.modal-dialog').css('opacity', '.5');
         },
         dataType: 'json',
-        success:function(response){
+        success: function(response) {
             console.log("Odpowiedź z serwera: ", response);
-            if(response.status === 'success'){
+            if (response.status === 'success') {
                 $('#name').val('');
                 $('#email').val('');
                 $('#pass1').val('');
                 $('#pass2').val('');
                 alert(response.message);
 
-               // Przekieruj użytkownika do uzytkownik.php po 2 sekundach. 
                 setTimeout(function() {
-                window.location.href = 'uzytkownik.php';
-                }, 2000);
-            }else{
-                alert('Pojawiły sie problemy, spróbuj ponownie');
+                    window.location.href = 'uzytkownik.php';
+                }, 1500);
+            } else {
                 alert(response.message);
             }
             $('.btn-primary').removeAttr("disabled");
             $('.modal-dialog').css('opacity', '');
         },
-        error:function (xhr, status, error) {
+        error: function(xhr, status, error) {
             console.error("Błąd AJAX: ", status, error);
-            alert("Wystąpił błąd podczas wysyłania żądania. Spróbuj ponownie.");
+            //alert("Wystąpił błąd podczas wysyłania żądania. Spróbuj ponownie.");
             $('.btn-primary').removeAttr("disabled");
             $('.modal-dialog').css('opacity', '');
-        }    
-    });			
-	}
+        }
+    });
+}
 
+function handleFormSubmit(event) {
+  event.preventDefault(); 
+
+  const form = document.getElementById('contactForm');
+  const formData = new FormData(form);
+
+  fetch('sendEmail.php', {
+    method: 'POST',
+    body: formData,
+  })
+  .then(response => response.text())
+  .then(data => {
+    // Ukryj wszystkie alerty
+    document.getElementById('alertSuccess').classList.add('d-none');
+    document.getElementById('alertError').classList.add('d-none');
+
+    // Sprawdź odpowiedź i wyświetl odpowiedni alert
+    if (data.includes('Wiadomość została wysłana.')) {
+      document.getElementById('alertSuccess').classList.remove('d-none');
+    } else {
+      document.getElementById('alertError').classList.remove('d-none');
+    }
+  })
+  .catch(error => {
+    // W przypadku błędu sieciowego lub innego
+    document.getElementById('alertSuccess').classList.add('d-none');
+    document.getElementById('alertError').classList.remove('d-none');
+  });
+
+  return false; // Zapobiega ponownemu wysłaniu formularza
+}
 
     </script>
 

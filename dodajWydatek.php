@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+if ($_SESSION["czas"] and $_SESSION["czas"]+60*10<time()) { // 10 minut
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+  }
+  $_SESSION["czas"] = time();
+
 // Sprawdzanie, czy użytkownik jest zalogowany
 if (!isset($_SESSION['id'])) {
     header('Location: index.php');

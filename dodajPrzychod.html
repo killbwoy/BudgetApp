@@ -1,10 +1,17 @@
 <?php
 	session_start();
+  var_dump($_POST);
 	
 	if(!isset($_SESSION['logged'])){
 		header('Location: index.php');
 		exit();
 	}
+  if ($_SESSION["czas"] and $_SESSION["czas"]+60*10<time()) { // 10 minut
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+  }
+  $_SESSION["czas"] = time();
 ?>
 
 <!DOCTYPE html>
@@ -83,19 +90,19 @@
               <form action="dodajPrzychod.php" method="POST">
                 <p> Kwota <input type="number" step="0.01" name="number" id="inputNumber"></p>
                 <p> Data <input type="date" name="date" id="inputDate"> </p>
-                <p> Rodzaj przychodu
+                <!--<p> Rodzaj przychodu
                   <select name="incomeKind">
-                    <option value="wynagrodzenie">Gotówka</option>
-                    <option value="przelew">Przelew</option>
+                    <option value="Gotówka">Gotówka</option>
+                    <option value="Przelew">Przelew</option>
                   </select>
-                </p>
+                </p>-->
                 <p> Kategoria
                   <select name="category">
-                    <option value="wynagrodzenie">Wynagrodzenie</option>
-                    <option value="premia">Premia</option>
-                    <option value="odsetki bankowe">Odsetki bankowe</option>
-                    <option value="sprzedaż">Sprzedaż</option>
-                    <option value="dywidenda">Dywidenda</option>
+                    <option value="Wynagrodzenie">Wynagrodzenie</option>
+                    <option value="Premia">Premia</option>
+                    <option value="Odsetki bankowe">Odsetki bankowe</option>
+                    <option value="Sprzedaż">Sprzedaż</option>
+                    <option value="Dywidenda">Dywidenda</option>
                   </select>
                 </p>
                 <p>

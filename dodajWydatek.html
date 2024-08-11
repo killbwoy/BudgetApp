@@ -5,6 +5,12 @@
 		header('Location: index.php');
 		exit();
 	}
+  if ($_SESSION["czas"] and $_SESSION["czas"]+60*10<time()) { // 10 minut
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+  }
+  $_SESSION["czas"] = time();
 ?>
 
 <!DOCTYPE html>
