@@ -1,5 +1,4 @@
 ﻿ <?php
-
 	session_start();
 	header('Content-Type: application/json');
 
@@ -64,7 +63,7 @@
 				// Sprawdzenie reCAPTCHA
 				if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
 					$recaptchaResponse = $_POST['g-recaptcha-response'];
-					$secret = '6Ld1TcIpAAAAANTY1nPyCTosGHenMITOp7v0mSF0';
+					$secret = '6LfF5S4qAAAAAPE_FxDAlQ0dy_jAYnvbFd0JJkYq';
 
 					$responseRecaptcha = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$recaptchaResponse");
 					$responseKeys = json_decode($responseRecaptcha, true);
@@ -204,6 +203,4 @@
 	}
 		// Zwróć odpowiedź jako JSON	
 		echo json_encode($response);	
-	
-	
 ?>

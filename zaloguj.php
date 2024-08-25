@@ -1,6 +1,5 @@
-﻿ <?php
-	
-session_start();
+﻿<?php	
+    session_start();
 
 // Sprawdzenie, czy dane zostały przesłane
 if (!isset($_POST['username']) || !isset($_POST['password'])) {
@@ -60,5 +59,3 @@ if ($result->num_rows > 0) {
 $stmt->close();
 $connection->close();
 ?>
-
-		

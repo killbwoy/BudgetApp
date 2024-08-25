@@ -185,7 +185,7 @@
                             <label>
                                 <input type="checkbox" id="regulamin" name="regulamin" /> Akceptuję regulamin
                             </label>
-                            <div class="g-recaptcha" data-sitekey="6Ld1TcIpAAAAAHQ-5zmjvSkOkhZaA7bQD29e22Ms"></div>
+                            <div class="g-recaptcha" data-sitekey="6LfF5S4qAAAAAK44PkG3he9snrsADwCyuliddxD3"></div>
                             <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                         </div>
                     <div class="modal-footer">
