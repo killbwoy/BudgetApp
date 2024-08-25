@@ -3,6 +3,14 @@
 	session_start();
 	header('Content-Type: application/json');
 
+	if (isset($_SESSION["czas"]) && ($_SESSION["czas"] + 60 * 10 < time())) { // 10 minut
+		session_unset();
+		session_destroy();
+		header('Location: index.php');
+		exit(); 
+	}
+	$_SESSION["czas"] = time();
+
 	$response = array();
 
 	if(isset($_POST['email']))
@@ -143,8 +151,26 @@
                     	$stmt->bind_param('i', $newUserId);
                     	$stmt->execute();
 
+						// Kopiowanie domyślnych kategorii wydatków
+						$stmt2 = $polaczenie->prepare("
+                        	INSERT INTO expenses_category_assigned_to_users (userId, name)
+                        	SELECT ?, name
+                        	FROM expenses_category_default
+                    	");
+                    	$stmt2->bind_param('i', $newUserId);
+                    	$stmt2->execute();
+
+						// Kopiowanie domyślnych kategorii płatnosci
+						$stmt3 = $polaczenie->prepare("
+                        	INSERT INTO payment_methods_assigned_to_users (userId, name)
+                        	SELECT ?, name
+                        	FROM payment_methods_default
+                    	");
+                    	$stmt3->bind_param('i', $newUserId);
+                    	$stmt3->execute();
+
 						// Sprawdzenie, czy wstawianie kategorii się powiodło
-                    	if ($stmt->affected_rows > 0) {
+                    	if ($stmt->affected_rows > 0 && $stmt2->affected_rows > 0 && $stmt3->affected_rows > 0) {
                         	// Zatwierdzenie transakcji
                         	$polaczenie->commit();
 							error_log("Transaction committed for user ID $newUserId.");
@@ -156,10 +182,12 @@
                         );
                     	} else {
 							// Wycofanie transakcji w przypadku błędu
-							$connection->rollback();
+							$polaczenie->rollback();
 							throw new Exception("Nie udało się skopiować kategorii.");
 						}
-                    $stmt->close();				
+                    $stmt->close();
+					$stmt2->close();
+					$stmt3->close();				
 					} 
 					$polaczenie->close();
 				}

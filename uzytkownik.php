@@ -1,11 +1,12 @@
 <?php
 	session_start();
   
-	if ($_SESSION["czas"] and $_SESSION["czas"]+60*10<time()) { // 10 minut
+  if (isset($_SESSION["czas"]) && ($_SESSION["czas"] + 60 * 10 < time())) { // 10 minut
     session_unset();
     session_destroy();
     header('Location: index.php');
-  }
+    exit(); 
+}
   $_SESSION["czas"] = time();
 
 	if(!isset($_SESSION['logged'])){

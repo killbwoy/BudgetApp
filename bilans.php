@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-if ($_SESSION["czas"] and $_SESSION["czas"]+60*10<time()) { // 10 minut
+if (isset($_SESSION["czas"]) && $_SESSION["czas"] + 60 * 10 < time()) { // 10 minut
     session_unset();
     session_destroy();
     header('Location: index.php');
+    exit();
   }
   $_SESSION["czas"] = time();
 
@@ -64,14 +65,20 @@ else if($period == "custom"){
     $_SESSION['custom_start_date'] = $start_date;
     $_SESSION['custom_end_date'] = $end_date;
 }
-// Przygotowanie zapytania
-$queryExpenses = "SELECT amount, category, date FROM expenses WHERE date >= ? AND date <= ? AND userId = ?";
-$queryIncomes = "SELECT amount, category, date FROM incomes WHERE date >= ? AND date <= ? AND userId = ?";
+// Przygotowanie zapytan
+$queryExpenses = "
+    SELECT e.amount, ec.name AS category_name
+    FROM expenses e
+    JOIN expenses_category_assigned_to_users ec ON e.expense_category_assigned_to_user_id = ec.id
+    WHERE e.date BETWEEN ? AND ? AND e.userId = ?
+";
 
-// Debugowanie - sprawdzenie czy zmienna $query jest stringiem
-if (!is_string($queryExpenses) || !is_string($queryIncomes)) {
-    die("Error: Query is not a string.");
-}
+$queryIncomes = "
+    SELECT i.amount, ic.name AS category_name
+    FROM incomes i
+    JOIN incomes_category_assigned_to_users ic ON i.income_category_assigned_to_user_id = ic.id
+    WHERE i.date BETWEEN ? AND ? AND i.userId = ?
+";
 // Zapytanie dla wydatków
 $stmtExpenses = $connection->prepare($queryExpenses);
 
@@ -86,11 +93,8 @@ $stmtExpenses->bind_param("ssi", $start_date, $end_date, $userId);
 // Wykonanie zapytania
 if ($stmtExpenses->execute()) {
     $result = $stmtExpenses->get_result();
-    $_SESSION['expenses'] = [];
+    $_SESSION['expenses'] = $result->fetch_all(MYSQLI_ASSOC);
 
-    while ($row = $result->fetch_assoc()) {
-        $_SESSION['expenses'][] = $row;
-    }
 } else {
     $_SESSION['messageAdd'] = "Błąd: " . $stmtExpenses->error;
 }
@@ -106,10 +110,8 @@ if ($stmtIncomes === false) {
 $stmtIncomes->bind_param("ssi", $start_date, $end_date, $userId);
 if ($stmtIncomes->execute()) {
     $result = $stmtIncomes->get_result();
-    $_SESSION['incomes'] = [];
-    while ($row = $result->fetch_assoc()) {
-        $_SESSION['incomes'][] = $row;
-    }
+    $_SESSION['incomes'] = $result->fetch_all(MYSQLI_ASSOC);
+    
 } else {
     $_SESSION['messageAdd'] = "Błąd: " . $stmtIncomes->error;
 }

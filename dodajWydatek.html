@@ -89,10 +89,11 @@
               <form action="dodajWydatek.php" method="POST">
                 <p> Kwota <input type="number" name="number" id="inputNumber"></p>
                 <p> Data <input type="date" name="date" id="inputDate"> </p>
-                <p> Rodzaj płatnosci
-                  <select name="expenseKind">
+                <p> Rodzaj płatności
+                  <select name="payment_method">
+                    <option value="Karta debetowa">Karta debetowa</option>
                     <option value="Gotówka">Gotówka</option>
-                    <option value="Karta">Karta</option>
+                    <option value="Karta kredytowa">Karta kredytowa</option>
                   </select>
                 </p>
                 <p> Kategoria
@@ -103,16 +104,17 @@
                     <option value="Telekomunikacja">Telekomunikacja</option>
                     <option value="Zdrowie">Zdrowie</option>
                     <option value="Ubrania">Ubrania</option>
-                    <option value="Higiena">Hyigiena</option>
+                    <option value="Higiena">Higiena</option>
                     <option value="Dzieci">Dzieci</option>
                     <option value="Rozrywka">Rozrywka</option>
-                    <option value="Podroze">Podróze</option>
+                    <option value="Podroze">Podróże</option>
                     <option value="Trening">Trening</option>
                     <option value="Ksiazki">Książki</option>
                     <option value="Kredyt">Spłaty kredytu</option>
                     <option value="Dobroczynnosc">Dobroczynność</option>
-                    <option value="Poduszka finsasowa">Poduszka finansowa</option>
+                    <option value="Poduszka_finansowa">Poduszka finansowa</option>
                     <option value="Inwestycje">Inwestycje</option>
+                    <option value="Inne">Inne</option>
                   </select>
                 </p>
                 <p>

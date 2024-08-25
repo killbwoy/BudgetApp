@@ -1,5 +1,13 @@
 <?php
 	session_start();
+
+  if (isset($_SESSION["czas"]) and $_SESSION["czas"] + 60 * 10 < time()) { // 10 minut
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+    exit();
+  }
+  $_SESSION["czas"] = time();
 	
 	if(!isset($_SESSION['logged'])){
 		header('Location: index.php');
@@ -152,7 +160,7 @@ if ($selected_period == 'custom') {
           <tbody>
           <?php foreach ($incomes as $income): ?>
             <tr>
-              <td><?php echo htmlspecialchars($income['category']); ?></td>
+              <td><?php echo htmlspecialchars($income['category_name']); ?></td>
             </tr>
             <tr class="active-row">
               <td><?php echo htmlspecialchars($income['amount']) . ' PLN'; ?></td>
@@ -185,7 +193,7 @@ if ($selected_period == 'custom') {
           <tbody>
           <?php foreach ($expenses as $expense): ?>
             <tr>
-              <td><?php echo htmlspecialchars($expense['category']); ?></td>
+              <td><?php echo htmlspecialchars($expense['category_name']); ?></td>
             </tr>
             <tr class="active-row">
               <td><?php echo htmlspecialchars($expense['amount']) . ' PLN'; ?></td>

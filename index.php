@@ -6,11 +6,17 @@
 		header('Location: uzytkownik.php');
 		exit();
 	}
+
     $login = "";
     $errorLogin = "";
+
     if(isset($_SESSION["errorLogin"]) && $_SESSION["errorLogin"] != ""){
         $errorLogin = $_SESSION['errorLogin'];
-        $login = $_SESSION['login'];
+
+        if(isset($_SESSION['login'])) {
+            $login = $_SESSION['login'];
+        }
+        
         unset($_SESSION['errorLogin']);
         unset($_SESSION['login']);
     }

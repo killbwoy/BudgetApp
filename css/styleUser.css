@@ -186,21 +186,16 @@ main {
     flex-shrink: 0;
 }
 
-@media only screen and (max-width: 1150px) {
-    .central {
-        height: 750px;
-        flex-direction: column;
-        display: grid;
+@media only screen and (max-width: 1425px) {
+    .centralimg img {
+        width: 45%;
+        height: auto;
+        margin: 0 2.5%;
+        margin-bottom: 25px
     }
 
-    .central img {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .centraltext {
-        margin-left: auto;
-        margin-right: auto;
+    .s1 .central {
+        height: auto;
     }
 }
 

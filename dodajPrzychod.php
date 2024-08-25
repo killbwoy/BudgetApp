@@ -39,13 +39,6 @@ try{
         throw new Exception("Kwota musi być liczbą.");
     }
     $amount = floatval($amount);
-
-    // Konwersja daty do formatu MySQL
-    $dateObj = DateTime::createFromFormat('Y-m-d', $date);
-    if ($dateObj === false) {
-        throw new Exception("Niepoprawny format daty.");
-    }
-    $date = $dateObj->format('Y-m-d');
     
     // Pobranie id kategorii z tabeli incomes_category_assigned_to_users
     $categoryStmt = $connection->prepare("SELECT id FROM incomes_category_assigned_to_users WHERE name = ? AND userId = ?");
