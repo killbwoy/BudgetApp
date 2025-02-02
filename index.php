@@ -41,9 +41,6 @@
     <link rel="stylesheet" href="./css/styleIndex.css">
     <link rel="stylesheet" href="./css/fontello.css">
 
-    <!-- Custom js -->
-    <!--<script src = "LoginSignUp.js"></script>-->
-
     <!-- Open Sans font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
@@ -69,16 +66,8 @@
                     <li><a href="#">Strona główna</a></li>
                     <li><a href="#">O aplikacji</a></li>
                     <li><a href="#">O autorze</a></li>
-                    <li><a>
-                        <button id = "loginBtn" type="button" class="buttonLogin" data-bs-toggle="modal" data-bs-target="#loginModal">
-                            Zaloguj
-                        </button></a>
-                    </li>
-                    <li>
-                        <button type="button" class="buttonSignup" data-bs-toggle="modal" data-bs-target="#signupModal">
-                            Zarejestruj
-                        </button>
-                    </li>
+                    <li><a href = "loginSite.php"><button type="button" class="buttonLogin"> Zaloguj </button></a></li>
+                    <li><a href = "registerSite.php"><button type="button" class="buttonSignup">Zarejestruj</button></a></li>
                 </ul>
 
             </nav>
@@ -132,10 +121,10 @@
                                 powiedzieć naszym pieniądzom, dokąd mają iść, zamiast się
                                 zastanawiać, gdzie się rozeszły.
                             </p>
-                            <button type="button" class="buttonSignup2" data-bs-toggle="modal"
-                                data-bs-target="#signupModal">
+                            <a href = "registerSite.php"><button type="button" class="buttonSignup2" data-bs-toggle="modal"
+                                data-bs-target="">
                                 Utwórz konto
-                            </button>
+                            </button></a>
                         </div>
                     </div>
                 </section>
@@ -152,83 +141,7 @@
             </article>
         </main>
 
-        <!-- Sign-up Modal -->
-        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true"
-            style="display: none">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="signupModalLabel">Utwórz konto</h5></br>
-                        <!--
-                            <p class="statusMsg"></p>
-                        -->
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="registrationForm" action="rejestracja.php" method="POST">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Nazwa użytkownika</label>
-                                <input type="text" class="form-control" id="name" name="name" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Adres e-mail</label>
-                                <input type="email" class="form-control" id="email" name="email" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="pass1" class="form-label">Hasło</label>
-                                <input type="password" class="form-control" id="pass1" name="pass1" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="pass2" class="form-label">Powtórz hasło</label>
-                                <input type="password" class="form-control" id="pass2" name="pass2" />
-                            </div>
-                            <label>
-                                <input type="checkbox" id="regulamin" name="regulamin" /> Akceptuję regulamin
-                            </label>
-                            <div class="g-recaptcha" data-sitekey="6LfF5S4qAAAAAK44PkG3he9snrsADwCyuliddxD3"></div>
-                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-                        </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Zarejestruj</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Zamknij</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Login Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" style="display: none"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Zaloguj</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick = "clearMsg()"></button>
-                    </div>
-                     
-                    <div class="modal-body">
-                        <form id="loginForm" action="zaloguj.php" method="POST">
-                        <p class = "err-msg"> <?php echo $errorLogin; ?></p>
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Nazwa Użytkownika</label>
-                                <input type="username" class="form-control" id="username" name="username" required/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Hasło</label>
-                                <input type="password" class="form-control" id="password" name="password" required />
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    Zamknij
-                                </button>
-                                <button type="submit" class="btn btn-primary" form="loginForm">Zaloguj</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- Contact Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -330,158 +243,6 @@
             $("#loginBtn").click();
         <?php } ?>
     });
-
-
-    $(document).ready(function () {
-        console.log("jQuery is loaded and document is ready");
-	    $('#registrationForm').submit(function (event) {
-            // Zatrzymaj domyślne działanie przycisku "submit"
-            event.preventDefault();
-            console.log("Form submission prevented");
-            submitForm();
-		    });
-	});
-
-    document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Zatrzymaj domyślną akcję formularza
-
-        if (validateForm()) {
-            var recaptchaResponse = grecaptcha.getResponse();
-            if (recaptchaResponse.length === 0) {
-                alert('Proszę zakończyć reCAPTCHA!');
-                return;
-            }
-
-            document.getElementById('g-recaptcha-response').value = recaptchaResponse;
-
-            submitForm();
-        }
-    });
-});
-
-function validateForm() {
-    console.log("validateForm function called");
-
-    let reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-    let name = $('#name').val().trim();
-    let email = $('#email').val().trim();
-    let pass1 = $('#pass1').val().trim();
-    let pass2 = $('#pass2').val().trim();
-
-    if (name === '') {
-        alert('Proszę uzupełnić swoje imię');
-        $('#name').focus();
-        return false;
-    } else if (name.length < 3 || name.length > 20) {
-        alert('Nick musi zawierać się od 3 do 20 znaków!');
-        $('#name').focus();
-        return false;
-    } else if (email === '') {
-        alert('Proszę uzupełnić swój adres email');
-        $('#email').focus();
-        return false;
-    } else if (!reg.test(email)) {
-        alert('Proszę wpisać poprawny email.');
-        $('#email').focus();
-        return false;
-    } else if (pass1 === '' || pass2 === '') {
-        alert('Proszę uzupełnić hasło');
-        $('#pass1').focus();
-        return false;
-    } else if (pass1.length < 8 || pass1.length > 20) {
-        alert('Hasło musi zawierać się od 8 do 20 znaków!');
-        $('#pass1').focus();
-        return false;
-    } else if (pass1 !== pass2) {
-        alert('Podane hasła nie są identyczne');
-        $('#pass2').focus();
-        return false;
-    } else if (!document.getElementById('regulamin').checked) {
-        alert('Akceptuj regulamin.');
-        return false;
-    }
-
-    return true;
-}
-
-function submitForm() {
-    console.log("submitForm function called");
-
-    $.ajax({
-        type: 'POST',
-        url: 'rejestracja.php',
-        data: {
-            contactFrmSubmit: 1,
-            name: $('#name').val().trim(),
-            email: $('#email').val().trim(),
-            pass1: $('#pass1').val().trim(),
-            pass2: $('#pass2').val().trim(),
-            'g-recaptcha-response': document.getElementById('g-recaptcha-response').value
-        },
-        beforeSend: function() {
-            $('.btn-primary').attr("disabled", "disabled");
-            $('.modal-dialog').css('opacity', '.5');
-        },
-        dataType: 'json',
-        success: function(response) {
-            console.log("Odpowiedź z serwera: ", response);
-            if (response.status === 'success') {
-                $('#name').val('');
-                $('#email').val('');
-                $('#pass1').val('');
-                $('#pass2').val('');
-                alert(response.message);
-
-                setTimeout(function() {
-                    window.location.href = 'uzytkownik.php';
-                }, 1500);
-            } else {
-                alert(response.message);
-            }
-            $('.btn-primary').removeAttr("disabled");
-            $('.modal-dialog').css('opacity', '');
-        },
-        error: function(xhr, status, error) {
-            console.error("Błąd AJAX: ", status, error);
-            //alert("Wystąpił błąd podczas wysyłania żądania. Spróbuj ponownie.");
-            $('.btn-primary').removeAttr("disabled");
-            $('.modal-dialog').css('opacity', '');
-        }
-    });
-}
-
-function handleFormSubmit(event) {
-  event.preventDefault(); 
-
-  const form = document.getElementById('contactForm');
-  const formData = new FormData(form);
-
-  fetch('sendEmail.php', {
-    method: 'POST',
-    body: formData,
-  })
-  .then(response => response.text())
-  .then(data => {
-    // Ukryj wszystkie alerty
-    document.getElementById('alertSuccess').classList.add('d-none');
-    document.getElementById('alertError').classList.add('d-none');
-
-    // Sprawdź odpowiedź i wyświetl odpowiedni alert
-    if (data.includes('Wiadomość została wysłana.')) {
-      document.getElementById('alertSuccess').classList.remove('d-none');
-    } else {
-      document.getElementById('alertError').classList.remove('d-none');
-    }
-  })
-  .catch(error => {
-    // W przypadku błędu sieciowego lub innego
-    document.getElementById('alertSuccess').classList.add('d-none');
-    document.getElementById('alertError').classList.remove('d-none');
-  });
-
-  return false; // Zapobiega ponownemu wysłaniu formularza
-}
 
     </script>
 

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-  
+
   if (isset($_SESSION["czas"]) && ($_SESSION["czas"] + 60 * 10 < time())) { // 10 minut
     session_unset();
     session_destroy();
@@ -36,7 +36,6 @@
 
     <!-- Custom js -->
 
-
     <!-- Open Sans font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
@@ -56,12 +55,12 @@
                 <ul class="menu">
                     <li><img class="logoSVG" src="./svg/save-money.png" alt="Logo" /></li>
                     <li><a href="uzytkownik.php">Strona główna</a></li>
-                    <li><a href="dodajPrzychod.html">Dodaj przychód</a></li>
-                    <li><a href="dodajWydatek.html">Dodaj wydatek</a></li>
-                    <li><a href="bilans.html">Przeglądaj bilans</a></li>
+                    <li><a href="dodajPrzychod.php">Dodaj przychód</a></li>
+                    <li><a href="dodajWydatek.php">Dodaj wydatek</a></li>
+                    <li><a href="bilans.php">Przeglądaj bilans</a></li>
                     <li><a href="#">Ustawienia</a></li>
                     <li>
-                        <a href = "wyloguj.php"><button type="button" class="buttonSignup" data-bs-toggle="modal" data-bs-target="">Wyloguj</button></a>
+                        <a href = "wyloguj.php"><button type="button" class="buttonSignup">Wyloguj</button></a>
                     </li>
                 </ul>
 
@@ -89,9 +88,9 @@
          unset($_SESSION['message']);
         }
         if(isset($_SESSION['messageAdd']))
-        {
-        echo '<h4 class="alert alert-warning">'.$_SESSION['messageAdd'].'</h4>';
-        unset($_SESSION['messageAdd']);
+         {
+         echo '<h4 class="alert alert-warning">'.$_SESSION['messageAdd'].'</h4>';
+         unset($_SESSION['messageAdd']);
         }
         ?>
       </div>

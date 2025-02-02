@@ -31,6 +31,10 @@ body {
     flex-direction: column;
 }
 
+main {
+    flex-grow: 1;
+}
+
 /*Styling*/
 
 nav {
@@ -51,7 +55,7 @@ h1.logo {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 7px;
-    margin-top: 2rem;
+    margin-top: 3rem;
     margin-bottom: 2rem;
     margin-left: auto;
     margin-right: auto;
@@ -139,10 +143,44 @@ h2 {
     color: var(--blue);
 }
 
+.s4 {
+    margin-top: auto;
+    background-color: var(--softgreen);
+    padding: 20px;
+    text-align: center;
+}
+
 .central {
     background-color: var(--mediumgreen);
     height: 400px;
     text-align: center;
+}
+
+.centralS3 {
+    background-color: var(--mediumgreen);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    ;
+}
+
+#areaA,
+#areaB {
+    width: 300px;
+    padding: 20px;
+}
+
+#areaB label,
+#areaB div {
+    padding-bottom: 25px;
 }
 
 .centralimg {
@@ -377,4 +415,10 @@ h2 {
 .err-msg {
     text-align: center;
     color: red;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
